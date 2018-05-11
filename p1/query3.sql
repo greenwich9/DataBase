@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM (SELECT i.item_id FROM Items i JOIN Categories c ON i.item_id = c.item_id GROUP BY i.item_id HAVING COUNT(*) = 4);

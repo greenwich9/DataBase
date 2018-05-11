@@ -1,0 +1,1 @@
+SELECT COUNT(user_id) FROM Users WHERE city_location = "New York";
