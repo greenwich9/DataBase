@@ -1,0 +1,63 @@
+{% extends "app_base.html" %}
+{% block content %}
+
+ 
+{% if item %}
+    <h3>{{ item['Name'] }}</h3> 
+    <div class="alert alert-info">
+        {% if status == "open" %}
+            This auction is still open!
+        {% elif status == "close" %}
+            This auction is closed.
+            {% if winner %}
+                The winner is: {{ winner['UserID'] }}
+            {% endif %}
+        {% elif status == "notStarted"  %}
+            This auction has not started yet!
+        {% endif %}
+    </div>
+    {% for key in item %}
+		<div>
+			<span>{{ key|e }}</span>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<span>{{ item[key]|e }}</span>
+		</div>
+    {% endfor %}
+
+    <h4>Categories</h4>
+    {% if categories %}
+        {% for category in categories %}
+            {% for key in category %}
+                <div>
+                    <span>{{ category[key]|e }}</span>
+                </div>
+            {% endfor %}
+        {% endfor %}
+    {% else %}
+        No categories assigned for this auction.
+    {% endif %}
+
+    <h4>Bids</h4>
+    {% if bids %}
+        {% for bid in bids %}
+            {% for key in bid %}
+            <div>
+                <span>{{ key|e }}</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>{{ bid[key]|e }}</span>
+            </div>
+            {% endfor %}
+            <div>--------</div>
+        {% endfor %}
+    {% else %}
+        No bids for this auction.
+    {% endif %}
+{% else %}
+<h3> Not Found</h3> 
+<div class="alert alert-info">
+    This auction does not exist!
+</div>
+{% endif %}
+
+
+{% endblock %}
